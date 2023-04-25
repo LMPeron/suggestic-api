@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 /**
  * Encrypt is a utility class that provides methods for encrypting data.

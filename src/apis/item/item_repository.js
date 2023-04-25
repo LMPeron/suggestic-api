@@ -1,12 +1,10 @@
-const CRUDRepository = require("../../commons/crud_repository");
-const ItemSchema = require("./item_schema");
+const CRUDRepository = require("../../commons/crud_repository.js");
+const ItemSchema = require("./item_schema.js");
 
 module.exports = class ItemRepository extends CRUDRepository {
   constructor() {
     super("item", ItemSchema.getSchema());
   }
-
-  // TODO add DataSource layer for clean architecture
 
   async create(item, userId) {
     const createdItem = await super.create(item);
