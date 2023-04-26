@@ -1,15 +1,15 @@
 {
-  "name": "entity-service",
-  "version": "1.0.0",
-  "description": "This is a starter template for a NodeJs REST service",
+  "name": "suggestic-api",
+  "version": "1.0",
+  "description": "Suggestic Code Challenge",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "api": "node api_gen",
     "test": "jest --forceExit --runInBand --detectOpenHandles --verbose"
   },
-  "author": "scetiner",
-  "license": "ISC",
+  "author": "LMPeron",
+  "license": "MIT",
   "dependencies": {
     "await-to-js": "2.1.1",
     "axios": "0.18.0",

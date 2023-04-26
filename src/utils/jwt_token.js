@@ -1,4 +1,3 @@
-// Import the necessary modules
 const jwt = require("jsonwebtoken");
 const { SECRET, TOKEN_DURATION } = process.env;
 

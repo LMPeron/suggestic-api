@@ -29,7 +29,6 @@ class Server {
    * @constructor
    */
   constructor() {
-    // create expressjs application
     this.loadConfiguration();
     this.app = express();
 
@@ -41,10 +40,8 @@ class Server {
     this.registerAPIRoutes();
     this.prettyPrintRegisteredRoutes();
 
-    // Create server
     this.server = http.createServer(this.app);
 
-    // Start listening
     this.listen();
   }
 
@@ -88,13 +85,12 @@ class Server {
     this.app.use(bodyParser.json({ limit: "20mb" }));
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
-    // security related configurations
     this.app.use(helmet());
     this.app.use(this.configureOptionsMethod);
 
     process.on("unhandledRejection", (reason, p) => {
       this._logger.error("Unhandled exception", reason, p);
-      throw reason; // optional, in case you want to treat these as errors
+      throw reason;
     });
 
     this._logger.info("Server started at " + new Date());
@@ -135,10 +131,8 @@ class Server {
    * Start HTTP server listening
    */
   listen() {
-    // listen on provided ports
     this.express_server = this.server.listen(this.port);
 
-    // add error handler
     this.server.on("error", (error) => {
       if (error.syscall !== "listen") {
         throw error;
@@ -149,31 +143,25 @@ class Server {
           ? `Pipe ${this.port}`
           : `Port ${this.port}`;
 
-      // handle specific listen errors with friendly messages
       switch (error.code) {
         case "EACCES":
           this._logger.error("requires elevated privileges");
           process.exit(1);
-          break;
         case "EADDRINUSE":
           this._logger.error(bind, " is already in use");
           process.exit(1);
-          break;
 
         default:
           throw error;
       }
     });
 
-    // start listening on port
     this.server.on("listening", () => {
       this._logger.info("Server ready. Listening on port ", this.port);
     });
   }
 }
 
-// Bootstrap the server
 const server = Server.bootstrap();
-//required for testing
 exports.express_server = server.express_server;
 exports.app = server.app;

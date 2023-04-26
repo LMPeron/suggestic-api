@@ -39,7 +39,7 @@ module.exports = class ItemController extends CRUDController {
 
   async getItemsHistoryByUser(req, res) {
     try {
-      const userId = req.user.id;
+      const userId = req.user;
       const itemHistory = await this._repository.getItemsHistoryByUser(userId);
       return res.status(200).json({ result: itemHistory });
     } catch (error) {

@@ -1,2 +1,86 @@
-# suggestic-api
- Suggestic code challenge to create a web service using any framework that flattens a nested sequence into a single list of values.
+
+# Summary
+1. [Introduction](#introduction)
+   * [Overview](#overview)
+   * [Requirements](#requirements)
+   * [Showcase](#showcase)
+   * [Links](#links)
+2  [Libraries and tools](#tools)
+3. [TODO](#todo)  
+4. [License](#license)
+
+
+<a name="introduction" />
+
+# Introduction
+
+<a name="overview" />
+
+## Overview
+
+Suggestic Code Challenge
+
+Create a web service using any framework that flattens a nested sequence into a single list of values.
+    
+
+<a name="showcase" />
+
+## Showcase
+
+<p align="center">
+
+  <img src="showcase/showcase_1.png" align="center" width=150>
+  <img src="showcase/showcase_2.png" align="center" width=150>
+  <img src="showcase/showcase_3.png" align="center" width=150>
+  <img src="showcase/showcase_4.png" align="center" width=150>
+
+</p>
+
+<a name="links" />
+
+## Links
+
+[Swagger] (https://suggestic-api.herokuapp.com/api-docs/)
+[App] (https://suggestic-app.vercel.app/)
+
+## Libraries and tools used in the project
+
+<a name="tools" />
+
+### JavaScript
+
+* [Node](https://nodejs.org/en)
+Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to build scalable, high-performance applications using JavaScript on the server-side.
+* [Express](https://expressjs.com/)
+Express.js is a Node.js web framework that provides a set of features for building web applications and APIs. It simplifies the process of creating web servers and handling HTTP requests and responses.
+* [MySQL](https://developer.chrome.com/multidevice/android/customtabs)
+MySQL is a open-source relational database management system. It is commonly used in web development to store and manage data for web applications.
+* [Swagger](https://developer.chrome.com/multidevice/android/customtabs)
+Swagger is an open-source framework for designing, building, and documenting APIs. It provides tools to generate interactive API documentation, client SDKs, and server stubs from an API's specification.
+
+### Deploy
+
+* [Heroku](https://www.heroku.com/)
+Heroku is a cloud-based platform that allows developers to deploy, manage, and scale web applications written in various programming languages, including Node.js.
+* [Vercel](https://vercel.com/)
+Vercel is a cloud-based platform for deploying and hosting web applications and static websites. It specializes in providing fast and scalable hosting for various frameworks, including Vue.js.
+* [Docker](https://www.docker.com/)
+Docker is an open-source containerization platform that allows developers to package their applications and dependencies into lightweight, portable containers. These containers can then be run on any system that supports Docker, making it easier to deploy and manage applications across different environments.
+### Tests
+* [Jest](https://jestjs.io/))
+Jest is a open-source JavaScript testing framework used for unit testing. It provides a simple and easy-to-use interface for writing and running tests, as well as a range of features such as snapshot testing, code coverage analysis, and mocking.
+
+## TODO
+
+* [Add architecture diagrams in README file.](#)
+* [Improve architecture implementing Clean Architecture.](#)
+* [Implement DataSource layer to entities.](#)
+* [Improve and add more unit tests](#)
+
+
+<a name="license" />
+
+## License
+Copyright 2023 Leonardo Martins Peron
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
