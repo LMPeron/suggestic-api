@@ -57,6 +57,12 @@ A Node.js web framework that provides a set of features for building web applica
 A open-source relational database management system. It is commonly used in web development to store and manage data for web applications.
 * [Swagger](https://developer.chrome.com/multidevice/android/customtabs)
 An open-source framework for designing, building, and documenting APIs. It provides tools to generate interactive API documentation, client SDKs, and server stubs from an API's specification.
+* [Vue](https://vuejs.org/)
+An open-source JavaScript framework for building user interfaces and single-page applications. It provides a range of features, including reactive data binding, component-based architecture, and a virtual DOM for efficient rendering.
+* [PrimeVue](https://primevue.org/)
+A set of open-source UI components for Vue.js that provides a rich and customizable set of UI widgets.
+* [Pinia](https://pinia.vuejs.org/)
+A state management library for Vue.js that provides a simple and scalable approach to managing application state. It is designed to work seamlessly with Vue.js and provides a range of features.
 
 ### Deploy
 
