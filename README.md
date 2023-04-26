@@ -5,7 +5,7 @@
    * [Requirements](#requirements)
    * [Showcase](#showcase)
    * [Links](#links)
-2  [Libraries and tools](#tools)
+2.  [Libraries and tools](#tools)
 3. [TODO](#todo)  
 4. [License](#license)
 
