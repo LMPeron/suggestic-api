@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
+  "host": "https://suggestic-api.herokuapp.com/",
   "basePath": "/api/v1.0/",
   "tags": [
     {
@@ -21,67 +21,28 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
 
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter the token with the `Bearer: ` prefix"
+    }
+  },
+
   "paths": {
-    "/user": {
-      "get": {
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": ["Users"],
-        "summary": "Get a list of users",
-        "responses": {
-          "200": {
-            "description": "A list of users"
-          }
-        }
-      },
-      "post": {
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": ["Users"],
-        "summary": "Create a new user",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "The created user"
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/register": {
+    "/user/register": {
       "post": {
         "summary": "Register a new user",
         "tags": ["Users"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User info to register",
+            "required": true
+          }
+        ],
         "responses": {
           "201": {
             "description": "The registered user"
@@ -92,20 +53,18 @@
         }
       }
     },
-    "/login": {
+    "/user/login": {
       "post": {
         "summary": "Login a user",
         "tags": ["Users"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Login"
-              }
-            }
-          },
-          "required": true
-        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User info to login",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "The logged in user"
@@ -119,11 +78,11 @@
         }
       }
     },
-    "/renew-token": {
+    "/user/renew-token": {
       "post": {
         "security": [
           {
-            "bearerAuth": []
+            "Bearer": []
           }
         ],
         "tags": ["Users"],
@@ -138,110 +97,20 @@
         }
       }
     },
-    "/{id}": {
-      "get": {
-        "summary": "Get a user by ID",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested user"
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "put": {
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "tags": ["Users"],
-        "summary": "Update a user by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The updated user"
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "delete": {
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Delete a user by ID",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User deleted"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      }
-    },
     "/item": {
       "post": {
         "tags": ["Item"],
         "summary": "Flattens a sequence",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Items sequence to flatten",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
-            
             "description": "Item flattened successfully"
           },
           "400": {
@@ -251,12 +120,12 @@
       },
       "get": {
         "tags": ["Item"],
-        "summary": "Get last 5 item history by user",
         "security": [
           {
-            "bearerAuth": []
+            "Bearer": []
           }
         ],
+        "summary": "Get last 5 item history by user",
         "responses": {
           "200": {
             "description": "Last items history by user retrieved successfully"
@@ -265,13 +134,23 @@
             "description": "Unauthorized"
           }
         }
-      },
+      }
+    },
+    "/item/{id}": {
       "delete": {
         "tags": ["Item"],
-        "summary": "Delete an item",
+        "summary": "Delete an item from history",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
         "security": [
           {
-            "bearerAuth": []
+            "Bearer": []
           }
         ],
         "responses": {
@@ -287,13 +166,13 @@
         }
       }
     },
-    "/items/all": {
+    "/item/all": {
       "get": {
         "tags": ["Item"],
         "summary": "Get all items history by user",
         "security": [
           {
-            "bearerAuth": []
+            "Bearer": []
           }
         ],
         "responses": {
@@ -306,13 +185,21 @@
         }
       }
     },
-    "/items/save": {
+    "/item/save": {
       "post": {
         "tags": ["Item"],
         "summary": "Flatten an item and save it",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Items sequence to flatten",
+            "required": true
+          }
+        ],
         "security": [
           {
-            "bearerAuth": []
+            "Bearer": []
           }
         ],
         "responses": {
@@ -324,38 +211,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/items/{id}": {
-      "delete": {
-        "tags": ["Item"],
-        "summary": "Delete an item by ID",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Item deleted"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Item not found"
           }
         }
       }
@@ -380,37 +235,20 @@
     },
 
     "User": {
-      "required": ["name", "_id", "companies"],
+      "required": ["name", "id", "email", "password"],
       "properties": {
-        "_id": {
+        "id": {
           "type": "integer",
           "uniqueItems": true
-        },
-        "isPublic": {
-          "type": "boolean"
         },
         "name": {
           "type": "string"
         },
-        "books": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "amount": {
-                "type": "number"
-              }
-            }
-          }
+        "email": {
+          "type": "string"
         },
-        "companies": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "password": {
+          "type": "string"
         }
       }
     }
